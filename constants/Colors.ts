@@ -1,10 +1,13 @@
-const pdsRedLight = "#e61937";
-const pdsRedDark = "#ba0923";
+const LRedLight = "#e61937";
+const LRedDark = "#ba0923";
 const white = "#fff";
 
 export const Colors = {
-  pdsRedLight: "#e61937",
-  pdsRedDark: "#ba0923",
+  LRedLight: "#e61937",
+  LRedDark: "#ba0923",
+  LGold1: "#f4b10a",
+  LGold2: "#fcc436",
+  LGold3: "#ffd365",
   pdsBlack: "#111111",
   pdsGrey: "#242424",
   pdsGrey2: "#363636",
@@ -20,21 +23,21 @@ export const Colors = {
   statusGrey: "#6b6b6b",
 
   light: {
-    primary: pdsRedDark,
+    primary: LRedDark,
     text: "#11181C",
     background: white,
-    tint: pdsRedLight,
+    tint: LRedLight,
     icon: "#687076",
     tabIconDefault: "#687076",
-    tabIconSelected: pdsRedLight,
+    tabIconSelected: LRedLight,
   },
   dark: {
-    primary: pdsRedLight,
+    primary: LRedLight,
     text: "#ECEDEE",
     background: "#151718",
-    tint: pdsRedDark,
+    tint: LRedDark,
     icon: "#9BA1A6",
     tabIconDefault: "#9BA1A6",
-    tabIconSelected: pdsRedDark,
+    tabIconSelected: LRedDark,
   },
 };

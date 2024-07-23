@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
-    color: "white",
+    color: Colors.gray,
     fontSize: 16,
     fontWeight: "bold",
-    marginTop: 12,
+    marginTop: 18,
   },
   spinner: {
     transform: [{scale: 1.4}],

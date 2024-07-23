@@ -1,13 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {StyleSheet, View, ScrollView} from "react-native";
 import {Colors} from "@/constants/Colors";
 import {PdsText} from "@/components/utilities/PdsText";
 import {useGlobalContext} from "@/contexts/GlobalContext";
 import { cs } from "@/constants/CommonStyles";
 import ProductCardHeaderImage from "@/components/ProductCardHeaderImage";
+import { LoadingComponent } from './../../../components/utilities/LoadingComponent';
+
+const ValueText = ({ fontSize, style, children}:any) => {
+  return (
+    <PdsText style={styles.typeText} fontSize={18}>{children}</PdsText>
+  )
+}
 
 export default function OneProductScreen() {
+  const [loading, setLoading] = useState(true)
   const {selectedProduct} = useGlobalContext();
+
+  useEffect(() => {
+    if(selectedProduct === null) {
+      setLoading(true);
+      return;
+    }
+
+    setLoading(false);
+  }, [])
+
+  if(loading) {
+    return (
+      <View style={{backgroundColor:Colors.pdsGrey, height: "100%"}}>
+        <LoadingComponent text="Loading product..." />
+      </View>
+    )
+  }
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -15,39 +40,44 @@ export default function OneProductScreen() {
       <View style={styles.productInfo}>
         <PdsText fontSize={32} bold>{selectedProduct.name}</PdsText>
 
-        <PdsText style={cs.mt1}>{selectedProduct.description}</PdsText>
-
         <View style={{gap: 10, marginVertical: 10}}>
           <View style={styles.infoItemContainer}>
-            <PdsText fontSize={18} gray>Price </PdsText>
-            <PdsText fontSize={18}> ${selectedProduct.price}</PdsText>
+            <PdsText style={styles.typeText} fontSize={18} gray>Category</PdsText>
+            <ValueText style={styles.typeText} fontSize={18}>{selectedProduct.category}</ValueText>
           </View>
 
           <View style={styles.infoItemContainer}>
-            <PdsText fontSize={18} gray>Brand </PdsText>
-            <PdsText fontSize={18}>{selectedProduct.brand}</PdsText>
+            <PdsText style={styles.typeText} fontSize={18} gray>Price </PdsText>
+            <ValueText style={styles.typeText} fontSize={18}>${selectedProduct.price}</ValueText>
           </View>
 
           <View style={styles.infoItemContainer}>
-            <PdsText fontSize={18} gray>Type </PdsText>
-            <PdsText fontSize={18}>{selectedProduct.type}</PdsText>
+            <PdsText style={styles.typeText} fontSize={18} gray>Brand </PdsText>
+            <ValueText style={styles.typeText} fontSize={18}>{selectedProduct.brand}</ValueText>
           </View>
 
           <View style={styles.infoItemContainer}>
-            <PdsText fontSize={18} gray>THC </PdsText>
-            <PdsText fontSize={18}>{selectedProduct.thc}%</PdsText>
+            <PdsText style={styles.typeText} fontSize={18} gray>Type </PdsText>
+            <ValueText style={styles.typeText} fontSize={18}>{selectedProduct.type}</ValueText>
           </View>
 
           <View style={styles.infoItemContainer}>
-            <PdsText fontSize={18} gray>CBD </PdsText>
-            <PdsText fontSize={18}>{selectedProduct.cbd}%</PdsText>
+            <PdsText style={styles.typeText} fontSize={18} gray>THC </PdsText>
+            <ValueText style={styles.typeText} fontSize={18}>{selectedProduct.thc}%</ValueText>
           </View>
 
           <View style={styles.infoItemContainer}>
-            <PdsText fontSize={18} gray>Grams </PdsText>
-            <PdsText fontSize={18}>{selectedProduct.grams}g</PdsText>
+            <PdsText style={styles.typeText} fontSize={18} gray>CBD </PdsText>
+            <ValueText style={styles.typeText} fontSize={18}>{selectedProduct.cbd}%</ValueText>
+          </View>
+
+          <View style={styles.infoItemContainer}>
+            <PdsText style={styles.typeText} fontSize={18} gray>Grams </PdsText>
+            <ValueText style={styles.typeText} fontSize={18}>{selectedProduct.grams}g</ValueText>
           </View>
         </View>
+
+        <PdsText style={cs.mt1}>{selectedProduct.description}</PdsText>
 
       </View>
     </ScrollView>
@@ -64,10 +94,14 @@ const styles = StyleSheet.create({
   },
   infoItemContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
     borderBottomWidth: 1,
     borderBottomColor: Colors.pdsGrey2,
     paddingBottom: 8,
+    gap: 8,
+  },
+  typeText: {
+    width: "50%",
+    textAlign: "left"
   }
 });

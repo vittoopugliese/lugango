@@ -1,22 +1,27 @@
 import {Tabs} from "expo-router";
 import React from "react";
-
 import {TabBarIcon} from "@/components/navigation/TabBarIcon";
 import {Colors} from "@/constants/Colors";
 
 export default function TabLayout() {
+
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors.pdsRedLight,
+        tabBarActiveTintColor: Colors.LRedLight,
         headerShown: true, // // // // sacar // // // //
         tabBarStyle: {
           backgroundColor: Colors.sidebarBackgroundColor,
           borderWidth: 0,
         },
+        headerTitleAlign: "center",
+        headerTitleAllowFontScaling: true, // ????
         headerStyle: {
           backgroundColor: Colors.sidebarBackgroundColor,
+          elevation: 0,
           borderWidth: 0,
+          shadowOpacity: 0,
+          borderBottomWidth: 0
         },
         headerTitleStyle: {
           color: Colors.white,
@@ -25,6 +30,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
+          headerShown: false,
           title: "Home",
           tabBarIcon: ({color, focused}) => (
             <TabBarIcon
@@ -35,7 +41,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="products/index"
+        name="products"
         options={{
           title: "Products",
           tabBarIcon: ({color, focused}) => (
@@ -75,6 +81,7 @@ export default function TabLayout() {
         name="products/[id]"
         options={{
           title: "Product Information",
+          headerShown: false,
           href: null,
         }}
       />

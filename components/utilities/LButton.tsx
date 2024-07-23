@@ -9,7 +9,7 @@ type GenericButton = {
   loading?: boolean;
 };
 
-export const PdsButton = ({text, style = {}, onPress, loading}: GenericButton) => {
+export const LButton = ({text, style = {}, onPress, loading}: GenericButton) => {
   return (
     <TouchableOpacity style={{...styles.pdsButton, ...style}} onPress={onPress}>
       { !loading ?

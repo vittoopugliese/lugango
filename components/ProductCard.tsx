@@ -6,7 +6,6 @@ import { useGlobalContext } from "@/contexts/GlobalContext";
 
 export default function ProductCard({product}: any) {
   let productName = (product.name.length > 28) ? product.name.slice(0, 28) + "..." : product.name;
-
   const router = useRouter();
   const {setSelectedProduct, updateQuantityFromCartProduct} = useGlobalContext();
   

@@ -2,14 +2,22 @@ import {View, TouchableOpacity, StyleSheet} from "react-native";
 import {Colors} from "@/constants/Colors";
 import {Ionicons} from "@expo/vector-icons";
 import {PdsInput} from "./utilities/PdsInput";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import { useRouter } from "expo-router";
 import { useGlobalContext } from "@/contexts/GlobalContext";
 
 export const CartOptions = ({product, preselectedQuantity = 1}: any) => {
   const [quantity, setQuantity] = useState(preselectedQuantity);
-  const { removeCartProduct, updateQuantityFromCartProduct } = useGlobalContext();
+  const { cartProducts, removeCartProduct, updateQuantityFromCartProduct } = useGlobalContext();
   const router = useRouter();
+
+  useEffect(() => {
+    let productFound = cartProducts.find((p:any) => p.id === product.id)
+    if (productFound) {
+      setQuantity(productFound.quantity);
+    }
+  }, [cartProducts])
+  
 
   const handleQuantityPress = (type?: string) => {
     if (type === "+") {
