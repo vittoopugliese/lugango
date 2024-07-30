@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {View, StyleSheet, TouchableOpacity} from "react-native";
+import {View, StyleSheet, TouchableOpacity, Dimensions} from "react-native";
 import {Colors} from "@/constants/Colors";
 import {PdsText} from "./utilities/PdsText";
 import {ScrollView} from "react-native-gesture-handler";
@@ -18,7 +18,7 @@ export default function CategoryCards() {
 
   return (
     <ScrollView
-      style={styles.container}
+      style={[styles.container]}
       horizontal={true}
       showsHorizontalScrollIndicator={false}>
       <TouchableOpacity key={999} style={styles.extrasCard}>
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.pdsBlack,
     flexDirection: "row",
     maxHeight: 96,
+    maxWidth: Dimensions.get("window").width,
     overflow: "scroll",
   },
   allText: {

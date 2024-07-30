@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     color: Colors.white,
     textAlign: "left",
     fontFamily: "Poppins",
-    letterSpacing: 0.3,
+    letterSpacing: 0.2,
   },
   boldText: {
     fontWeight: "bold",

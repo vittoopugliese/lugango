@@ -5,19 +5,19 @@ import {PdsInput} from "./utilities/PdsInput";
 import {useEffect, useState} from "react";
 import { useRouter } from "expo-router";
 import { useGlobalContext } from "@/contexts/GlobalContext";
+import { PdsText } from "./utilities/PdsText";
 
 export const CartOptions = ({product, preselectedQuantity = 1}: any) => {
   const [quantity, setQuantity] = useState(preselectedQuantity);
-  const { cartProducts, removeCartProduct, updateQuantityFromCartProduct } = useGlobalContext();
+  const { cartProducts, removeCartProduct, updateQuantityFromCartProduct, setSelectedProduct } = useGlobalContext();
   const router = useRouter();
 
   useEffect(() => {
     let productFound = cartProducts.find((p:any) => p.id === product.id)
     if (productFound) {
-      setQuantity(productFound.quantity);
+      setQuantity(productFound.quantity)
     }
   }, [cartProducts])
-  
 
   const handleQuantityPress = (type?: string) => {
     if (type === "+") {
@@ -40,10 +40,6 @@ export const CartOptions = ({product, preselectedQuantity = 1}: any) => {
     }
   }
 
-  const handleViewPage = () => {
-    router.navigate(`products/${product.id}`)
-  };
-
   const handleDeleteProductFromCard = () => {
     removeCartProduct(product.id)
   };
@@ -56,7 +52,7 @@ export const CartOptions = ({product, preselectedQuantity = 1}: any) => {
           <Ionicons name="remove" size={24} color={Colors.gray} />
         </TouchableOpacity>
 
-        <PdsInput placeholder="" keyboardType="number-pad" value={quantity} 
+        <PdsInput placeholder="1" keyboardType="number-pad" value={quantity.toString()} 
           style={styles.quantityInput} onChangeText={handleInputTextChange} />
 
         <TouchableOpacity style={styles.quantityButton} onPress={() => handleQuantityPress("+")}>
@@ -65,10 +61,6 @@ export const CartOptions = ({product, preselectedQuantity = 1}: any) => {
       </View>
 
       <View style={{flexDirection: "row", gap: 10, alignItems: "center"}}>
-        <TouchableOpacity style={styles.crossContainer} onPress={handleViewPage}>
-          <Ionicons name="document" size={18} color={Colors.gray} />
-        </TouchableOpacity>
-
         <TouchableOpacity style={styles.crossContainer} onPress={handleDeleteProductFromCard}>
           <Ionicons name="close" size={27} color={Colors.gray} />
         </TouchableOpacity>

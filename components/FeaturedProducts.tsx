@@ -5,24 +5,21 @@ import ProductCard from "./ProductCard";
 import { products } from "@/constants/CommonStyles";
 
 export default function FeaturedProducts() {
-  return <FlatList style={styles.container} data={products}
+  return <FlatList data={products} 
   showsVerticalScrollIndicator={false} keyExtractor={(item) => item.id}
   renderItem={({item}) => (
     <View style={styles.productGrid}>
-      <ProductCard product={item} />
+      <ProductCard onHome product={item} />
     </View>
   )}
 />;
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: Colors.pdsGrey,
-        flex: 1,
-      },
       productGrid: {
-        flexDirection: "column",
-        padding: 15,
-        gap: 15,
+        flexDirection: "row",
+        padding: 5.4,
+        justifyContent: "space-between",
+        width: "100%",
       },
 });

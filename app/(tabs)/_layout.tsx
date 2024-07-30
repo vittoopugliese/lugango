@@ -2,14 +2,15 @@ import {Tabs} from "expo-router";
 import React from "react";
 import {TabBarIcon} from "@/components/navigation/TabBarIcon";
 import {Colors} from "@/constants/Colors";
+import { Platform } from 'react-native';
 
 export default function TabLayout() {
 
   return (
     <Tabs
       screenOptions={{
+        headerTransparent: Platform.OS === "ios",
         tabBarActiveTintColor: Colors.LRedLight,
-        headerShown: true, // // // // sacar // // // //
         tabBarStyle: {
           backgroundColor: Colors.sidebarBackgroundColor,
           borderWidth: 0,
@@ -74,15 +75,6 @@ export default function TabLayout() {
               color={color}
             />
           ),
-        }}
-      />
-
-      <Tabs.Screen
-        name="products/[id]"
-        options={{
-          title: "Product Information",
-          headerShown: false,
-          href: null,
         }}
       />
     </Tabs>

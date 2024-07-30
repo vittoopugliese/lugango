@@ -4,7 +4,7 @@ import {Colors} from "@/constants/Colors";
 import {useRouter} from "expo-router";
 import { useGlobalContext } from "@/contexts/GlobalContext";
 
-export default function ProductCard({product}: any) {
+export default function ProductCard({product, onHome}: any) {
   let productName = (product.name.length > 28) ? product.name.slice(0, 28) + "..." : product.name;
   const router = useRouter();
   const {setSelectedProduct, updateQuantityFromCartProduct} = useGlobalContext();
@@ -15,9 +15,8 @@ export default function ProductCard({product}: any) {
   };
 
   return (
-    <TouchableOpacity style={styles.productCard} key={product.id}
-      onPress={handleProductClick}>
-      <Image source={product.image} style={styles.productImage} />
+    <TouchableOpacity style={[styles.productCard, {width: "100%" }]} key={product.id} onPress={handleProductClick}>
+      <Image source={product.image} style={[styles.productImage, {borderBottomLeftRadius: onHome ? 0 : 1, borderBottomRightRadius: onHome ? 0 : 1}]} />
       <View style={styles.productInfo}>
         <PdsText fontSize={18} bold>{productName}</PdsText>
         <View style={{flexDirection: "row", justifyContent: "space-between"}}>
@@ -25,7 +24,10 @@ export default function ProductCard({product}: any) {
             <PdsText gray>{product.brand} | {product.type} | {product.grams}g</PdsText>
             <PdsText gray>THC: {product.thc}% | CBD: {product.cbd}%</PdsText>
           </View>
-          <PdsText bold fontSize={24} style={{paddingRight: 6, paddingTop: 10}}>${product.price}</PdsText>
+          {
+            !onHome &&
+            <PdsText bold fontSize={24} style={{paddingRight: 6, paddingTop: 10}}>${product.price}</PdsText>
+          }
         </View>
       </View>
     </TouchableOpacity>

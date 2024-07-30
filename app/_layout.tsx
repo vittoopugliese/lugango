@@ -3,6 +3,7 @@ import { GlobalContextProvider } from "@/contexts/GlobalContext";
 import {useFonts} from "expo-font";
 import {Stack} from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
 import {useEffect} from "react";
 import "react-native-reanimated";
 
@@ -26,6 +27,7 @@ export default function RootLayout() {
 
   return (
     <GlobalContextProvider>
+      <StatusBar style="auto" />
       <Stack screenOptions={{headerShown: false}} />
     </GlobalContextProvider>
   );

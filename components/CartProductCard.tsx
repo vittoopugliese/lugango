@@ -1,25 +1,35 @@
-import {StyleSheet, View, Image, TouchableOpacity} from "react-native";
+import {StyleSheet, View, Image, TouchableOpacity, Touchable} from "react-native";
 import {PdsText} from "@/components/utilities/PdsText";
 import {Colors} from "@/constants/Colors";
 import {CartOptions} from "./CartOptions";
+import { useRouter } from "expo-router";
+import { useGlobalContext } from "@/contexts/GlobalContext";
 
 export default function CartProductCard({product}: any) {
-  let productName = (product.name.length > 25) ? product.name.slice(0, 25) + "..." : product.name;
+  let productName = (product.name.length > 20) ? product.name.slice(0, 20) + "..." : product.name;
+
+  const {setSelectedProduct} = useGlobalContext(); 
+  const router = useRouter();
+
+  const handleOnCartProductPress = () => {
+    setSelectedProduct(product);
+    router.navigate(`products/${product.id}`)
+  };
 
   return (
-    <View style={{marginVertical: 10}}>
+    <TouchableOpacity style={{marginVertical: 10}} onPress={handleOnCartProductPress}>
       <View style={styles.productCard} key={product.id}>
         <View style={{flexDirection: "row"}}>
           <Image source={product.image} style={styles.productImage} />
           <View style={styles.productInfo}>
-            <PdsText bold>{productName}</PdsText>
-            <PdsText gray>{product.brand} | {product.type} | {product.grams}g</PdsText>
-            <PdsText fontSize={18}>${product.price}</PdsText>
+            <PdsText fontSize={14} bold>{productName}</PdsText>
+            <PdsText fontSize={12} gray>{product.brand} | {product.type} | {product.grams}g</PdsText>
+            <PdsText fontSize={16}>${product.price}</PdsText>
           </View>
         </View>
       </View>
       <CartOptions product={product} />
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -37,6 +47,7 @@ const styles = StyleSheet.create({
   },
   productInfo: {
     padding: 10,
+    paddingBottom: 0,
     justifyContent: "space-between",
   }
 });

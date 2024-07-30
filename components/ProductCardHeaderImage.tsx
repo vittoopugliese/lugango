@@ -51,9 +51,8 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     position: "absolute",
     width: 25,
-    padding: 3,
-    paddingVertical: 0,
-    fontSize: 14,
+    fontSize: 11,
+    justifyContent: "center",
     left: -4,
     top: -4,
   },
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
   },
   productImage: {
     width: "100%",
-    height: 304,
+    height: 394,
   },
   cartButton: {
     position: "absolute",
